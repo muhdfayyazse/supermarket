@@ -41,6 +41,7 @@ class RegisterForm extends React.Component {
     }
     render() {
         return (
+            
             <form> 
             <div class="form-group">
                 <label>Name</label>
