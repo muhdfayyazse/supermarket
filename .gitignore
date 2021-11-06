@@ -19487,3 +19487,15 @@ node_modules/es6-promise/lib/es6-promise/promise/all.js
 node_modules/es6-promise/lib/es6-promise/promise/race.js
 node_modules/es6-promise/lib/es6-promise/promise/reject.js
 node_modules/es6-promise/lib/es6-promise/promise/resolve.js
+node_modules/es6-symbol/test/implement.js
+node_modules/es6-symbol/test/index.js
+node_modules/es6-symbol/test/is-implemented.js
+node_modules/es6-symbol/test/is-native-implemented.js
+node_modules/es6-symbol/test/is-symbol.js
+node_modules/es6-symbol/test/polyfill.js
+node_modules/es6-symbol/test/validate-symbol.js
+node_modules/es6-promise/package.json
+node_modules/es6-promise/lib/es6-promise/utils.js
+node_modules/es6-symbol/lib/private/generate-name.js
+node_modules/es6-symbol/lib/private/setup/standard-symbols.js
+node_modules/es6-symbol/lib/private/setup/symbol-registry.js
