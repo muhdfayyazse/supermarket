@@ -50,6 +50,8 @@ import SavedCardsadd from './component/Account/SavedCardsadd';
 import  {receiveProducts} from './actions';
 import { connect } from 'react-redux';
 
+import LoginForm from './layouts/header/LoginForm';
+
 class App extends React.Component {
   constructor(props)
   {

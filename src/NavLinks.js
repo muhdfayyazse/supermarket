@@ -30,7 +30,7 @@ export default [
 
    {
       "menu_title": "Admin Panel",
-      "path": "/admin-panel/Reports",
+      "path": "/admin-panel",
       "icon": "perm_identity",
       "child_routes": null
    }

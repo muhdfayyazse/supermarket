@@ -45,7 +45,7 @@ class AdminproductList extends Component {
                             <Link to="#">
                                 {product.pictures[0] ?
                                     <div className="product-thumbnail-main">
-                                        <img src={require(`../assets/images/${product.pictures[0]}`)} className="img-fluid" />
+                                        <img src={'data:' + product.pictures[0].imageType +';base64,'+product.pictures[0].imageBased64} className="img-fluid" />
                                     </div>
                                 :
                                     null
@@ -70,7 +70,7 @@ class AdminproductList extends Component {
                             {product.tags ?
                                    <span className="ciyashop-product-category">
                                     {product.tags.map((tag,index) =>
-                                            <span>{tag}{index === product.tags.length-1 ?'':','}
+                                            <span>{tag.category}{index === product.tags.length-1 ?'':','}
                                             </span>
 
                                      )}
@@ -96,7 +96,7 @@ class AdminproductList extends Component {
                             </p>
                             </div>
                             : null }
-                        </div>
+                        </div> 
                         </div>
                     </div>
 

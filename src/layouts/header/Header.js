@@ -10,6 +10,10 @@ import AllProduct from '../../api/product';
 import logo from '../../assets/images/logo.svg';
 import navLinks from '../../NavLinks.js';
 
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+
+
 
 class Header extends React.Component {
     constructor(props) {
@@ -26,14 +30,14 @@ class Header extends React.Component {
             collapsed: true,
             CartHide:true,
             classset:'',
-            getproduct:AllProduct
+            getproduct:AllProduct,
+            registerName:''
         }
         var removeFromCart, removeFromWishList;
         this.toggle = this.toggle.bind(this);
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.ShowCart = this.ShowCart.bind(this);
     }
-
 
     toggle() {
         this.setState({
@@ -75,11 +79,7 @@ class Header extends React.Component {
         }));
     }
 
-    checkLogin(){
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    }
-
-      componentDidMount() {
+    componentDidMount() {
         window.addEventListener('scroll', this.handleScroll); 
       }
       componentWillUnmount() {
@@ -314,6 +314,14 @@ class Header extends React.Component {
                                                                                                                     ))}
                                                                                                                 </DropdownMenu>
                                                                                                             </UncontrolledDropdown>
+                                                                                                        </Fragment>
+                                                                                                    :
+                                                                                                    (navLink.path === '/admin-panel') ?
+                                                                                                    <Fragment>
+                                                                                                        <NavItem>
+                                                                                                            <NavLink href={navLink.path}>{navLink.menu_title}</NavLink>
+                                                                                                        </NavItem>
+
                                                                                                     </Fragment>
                                                                                                     :
                                                                                                     <Fragment>
@@ -477,50 +485,14 @@ class Header extends React.Component {
                                             </Nav>
                                             <TabContent activeTab={this.state.activeTab}>
                                                 <TabPane tabId="1">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label>Email address</label>
-                                                            <input type="text" class="form-control" placeholder="Enter email"></input>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Password </label>
-                                                            <input type="text" class="form-control" placeholder="Password"></input>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <Link className="btn btn-primary mt-1" >Log in</Link>
-                                                            <Link className="btn btn-secondary ml-2 mt-1" onClick={this.toggle} >Cancel</Link>
-                                                        </div>
-                                                        <p className="mb-0">Don't have account? <Link to="#" className={classnames({ active: this.state.activeTab === '2' })}
+                                                    <LoginForm onCallToggle={this.toggle} />                                                
+                                                    <p className="mb-0">Don't have account? <Link to="#" className={classnames({ active: this.state.activeTab === '2' })}
                                                             onClick={() => { this.logintoggle('2'); }} > Register </Link>here</p>
-                                                    </form>
                                                 </TabPane>
                                                 <TabPane tabId="2">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label>Name</label>
-                                                            <input type="texttext" class="form-control" placeholder="Name"></input>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Email address</label>
-                                                            <input type="text" class="form-control" placeholder="Enter email"></input>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Password </label>
-                                                            <input type="text" class="form-control" placeholder="Password"></input>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Confirm Password </label>
-                                                            <input type="text" class="form-control" placeholder="Confirm Password"></input>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <Link className="btn btn-primary" onClick={this.checkLogin}  >Register</Link>
-                                                            <Link className="btn btn-secondary ml-2" onClick={this.toggle} >Cancel</Link>
-
-                                                        </div>
-                                                        <p className="mb-0">Already have account? <Link to="#" className={classnames({ active: this.state.activeTab === '1' })}
+                                                    <RegisterForm onCallToggle={this.toggle}/>
+                                                    <p className="mb-0">Already have account? <Link to="#" className={classnames({ active: this.state.activeTab === '1' })}
                                                             onClick={() => { this.logintoggle('1'); }} > SignIn </Link> here </p>
-                                                    </form>
                                                 </TabPane>
                                             </TabContent>
                                         </ModalBody>

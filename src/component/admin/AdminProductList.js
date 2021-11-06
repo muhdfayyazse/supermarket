@@ -3,7 +3,8 @@
  */
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import productdata from '../../api/product';
+//import productdata from '../../api/product';
+
 import Pagination from '../../services/Pagination';
 import AdminproductList from '../../widgets/AdminProduct';
 
@@ -11,23 +12,41 @@ class AdminProduct extends Component {
 
     constructor(props) {
         super(props);
+        console.log("constructor called");
         this.state={
             productsearch:'',
-            productList:productdata,
+            productList:[],
             currentProduct: [],
             currentPage: null,
             totalPages: null,
-            cp_productList:productdata,
-            IsDeleteProcess:false
-        }
+            cp_productList:[],
+            IsDeleteProcess:false,
+            isLoaded: false
+        };
+    }
+    componentWillMount() {
+        console.log("componentWillMount called");
     }
     componentDidMount() {
+        console.log("componentDidMount called");
         window.scrollTo(0, 0);
+        fetch('http://localhost:9000/cosmeticsoms/v1/products')
+        .then(response=> response.json() )
+        .then(json => {
+            this.setState({
+                isLoaded: true,
+                productList:json,
+                cp_productList:json
+            })
+        })
+        .catch(err => console.log(err))
     }
+
     onProductSearch(searchproduct)
     {
         if(searchproduct === '')
         {
+            console.log("searchproduct === ''",this.state.cp_productList);
             var curr_products = this.state.cp_productList.slice((this.state.currentPage - 1) * 12, ((this.state.currentPage - 1) * 12) + 12);
             this.setState({
                 ...this.state,
@@ -85,11 +104,14 @@ class AdminProduct extends Component {
     }
 
     onPageChanged = data => {
+        console.log("onPageChanged called");
         const { productList } = this.state;
         const { currentPage, totalPages, pageLimit } = data;
 
         const offset = (currentPage - 1) * pageLimit;
         const currentProduct = productList.slice(offset, offset + pageLimit);
+
+        console.log("onPageChanged ===> ", currentProduct);
         this.setState({
                 ...this.state,
                 currentPage:currentPage,
@@ -119,7 +141,11 @@ class AdminProduct extends Component {
         }
     }
     render() {
-        return (
+        if(!this.state.isLoaded){
+            return (<div>Loading ... </div>);
+        }else{
+
+            return (
             <div>
                 <div className="section-ptb">
                     <Container>
@@ -184,6 +210,7 @@ class AdminProduct extends Component {
                 </div>
             </div>
         )
+        }
     }
 }
 export default AdminProduct;
